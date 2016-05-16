@@ -1,0 +1,8 @@
+GMAutomation Project will use selenium
+GMTests will not
+
+
+GregSelenium@outlook.com
+P@ssword1234!
+
+https://login.live.com/
