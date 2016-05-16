@@ -10,6 +10,7 @@ namespace GMTests.Steps
     {
         
 
+
         [Given(@"a browser opened at WordPress login page")]
         public void GivenABrowserOpenedAtWordPressLoginPage()
         {
@@ -22,21 +23,20 @@ namespace GMTests.Steps
             LoginPage.LoginAs(userName, password);
         }
 
-        [When(@"I click the button My Site")]
-        public void WhenIClickTheButtonMySite()
-        {
-            TopBarPage.ClickMySite();
-        }
-
-
         [Then(@"The WordPress homepage is displayed")]
         public void ThenTheWordPressHomepageIsDisplayed()
         {
             Assert.IsTrue(ReaderPage.IsAt());
         }
 
+        [When(@"I click the button My Site")]
+        public void WhenIClickTheButtonMySite()
+        {
+            TopBarPage.ClickMySite();
+        }
+
         [When(@"I click the button Blog Posts Add")]
-        public void WhenICickTheButtonBlogPostsAdd()
+        public void WhenIClickTheButtonBlogPostsAdd()
         {
             SideBarPage.CickTheButtonBlogPostsAdd();
         }
@@ -46,6 +46,7 @@ namespace GMTests.Steps
         {
             NewPostPage.PostEditorDisplayed();
         }
+
 
 
 
