@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 using System.Configuration;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Remote;
 
 
 namespace GMAutomation
@@ -21,28 +22,18 @@ namespace GMAutomation
 
         public static void Initialise()
         {
+            DesiredCapabilities capability = DesiredCapabilities.Chrome();
+            capability.SetCapability("browserstack.user", "gregmawson1");
+            capability.SetCapability("browserstack.key", "ExfKsgDmyEkrQcqMfjgZ");
 
-            string browser = ConfigurationManager.AppSettings["Browser"];
-
-            switch (browser)
-            {
-                case "Chrome":
-                    Instance = new ChromeDriver();
-                    break;
-                case "IE":
-                    Instance = new InternetExplorerDriver();
-                    break;
-                case "Firefox":
-                    Instance = new FirefoxDriver();
-                    break;
-                default:
-                    throw new Exception("No valid config for key 'Browser'. Accepted values are 'Chrome', 'IE', 'Firefox'");
-
-            }
+            capability.SetCapability("browser", "Chrome");
+            capability.SetCapability("browser_version", "50.0");
+            capability.SetCapability("os", "Windows");
+            capability.SetCapability("os_version", "10");
+            capability.SetCapability("resolution", "1024x768");
 
 
-            Instance.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(15));
-            Instance.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(15));
+            Instance = new RemoteWebDriver(new Uri("http://hub.browserstack.com/wd/hub/"), capability);
             Instance.Manage().Timeouts().SetScriptTimeout(TimeSpan.FromSeconds(15));
         }
 
